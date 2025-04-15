@@ -17,23 +17,35 @@ if (NOT EXISTS "${EXTERNAL_DIR}/raylib")
     execute_process(COMMAND ${CMAKE_COMMAND} -E tar xzf ${EXTERNAL_DIR}/raylib.zip WORKING_DIRECTORY ${EXTERNAL_DIR})
     execute_process(COMMAND ${CMAKE_COMMAND} -E rename ${EXTERNAL_DIR}/raylib-5.5 ${EXTERNAL_DIR}/raylib)
     execute_process(COMMAND ${CMAKE_COMMAND} -E remove ${EXTERNAL_DIR}/raylib.zip)
+
+    file(DOWNLOAD https://github.com/RobLoach/raylib-cpp/archive/refs/tags/v5.5.0.zip ${EXTERNAL_DIR}/raylib.zip)
+    execute_process(COMMAND ${CMAKE_COMMAND} -E tar xzf ${EXTERNAL_DIR}/raylib.zip WORKING_DIRECTORY ${EXTERNAL_DIR})
+    execute_process(COMMAND ${CMAKE_COMMAND} -E rename ${EXTERNAL_DIR}/raylib-cpp-5.5.0 ${EXTERNAL_DIR}/raylib-cpp)
+    execute_process(COMMAND ${CMAKE_COMMAND} -E remove ${EXTERNAL_DIR}/raylib.zip)
 endif()
 
 # Add preprocessor definitions based on the build type
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
     add_definitions(-DUR_DEBUG)
-    add_definitions(-DASSETS_DIR=\"../../../../assets/\")
-elseif(CMAKE_BUILD_TYPE STREQUAL "Release")
+    add_definitions(-DASSETS_DIR=\"../../../assets/\")
+    elseif(CMAKE_BUILD_TYPE STREQUAL "Release")
+    add_definitions(-DUR_RELEASE)
+    add_definitions(-DASSETS_DIR)
+    elseif(CMAKE_BUILD_TYPE STREQUAL "Debug-Unix")
+    add_definitions(-DUR_DEBUG)
+    add_definitions(-DASSETS_DIR=\"../../assets/\")
+elseif(CMAKE_BUILD_TYPE STREQUAL "Release-Unix")
     add_definitions(-DUR_RELEASE)
     add_definitions(-DASSETS_DIR)
 endif()
 
 # Define Latest OpenGL version before building Raylib
-add_definitions(-DGRAPHICS_API_OPENGL_43)
+add_definitions(-DGRAPHICS_API_OPENGL_33)
 
 # Add Raylib
 add_subdirectory(${EXTERNAL_DIR}/raylib)
 include_directories(${EXTERNAL_DIR}/raylib/src)
+include_directories(${EXTERNAL_DIR}/raylib-cpp/include)
 
 # Define all source files
 file(GLOB_RECURSE GAME_SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp")

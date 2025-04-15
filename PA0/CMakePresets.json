@@ -32,10 +32,9 @@
     {
       "name": "debug",
       "inherits": [
-        "base-vs",
-        "base-unix"
+        "base-vs"
       ],
-      "description": "Debug build for any platform",
+      "description": "Debug build for windows",
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Debug",
         "CMAKE_EXPORT_COMPILE_COMMANDS": "YES"
@@ -44,12 +43,33 @@
     {
       "name": "release",
       "inherits": [
-        "base-vs",
-        "base-unix"
+        "base-vs"
       ],
-      "description": "Release build for any platform",
+      "description": "Release build for windows",
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Release",
+        "CMAKE_EXPORT_COMPILE_COMMANDS": "YES"
+      }
+    },
+    {
+      "name": "debug-unix",
+      "inherits": [
+        "base-unix"
+      ],
+      "description": "Debug build for unix",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug-Unix",
+        "CMAKE_EXPORT_COMPILE_COMMANDS": "YES"
+      }
+    },
+    {
+      "name": "release-unix",
+      "inherits": [
+        "base-unix"
+      ],
+      "description": "Release build for unix",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release-Unix",
         "CMAKE_EXPORT_COMPILE_COMMANDS": "YES"
       }
     }
