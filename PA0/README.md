@@ -1,0 +1,1 @@
+Get Raylib repo and clone it in the external folder

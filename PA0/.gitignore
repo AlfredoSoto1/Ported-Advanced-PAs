@@ -1,0 +1,11 @@
+# Exclude binaries
+/build
+
+# External dependencies
+/external
+
+# IDE generated
+/.vs
+
+# Required static & dynamic libraries
+/lib
